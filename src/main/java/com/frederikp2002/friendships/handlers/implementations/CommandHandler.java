@@ -2,9 +2,11 @@ package com.frederikp2002.friendships.handlers.implementations;
 
 import com.frederikp2002.friendships.commands.ICommand;
 import com.frederikp2002.friendships.commands.implementations.HelpCommand;
+import com.frederikp2002.friendships.commands.implementations.database.CheckConnectionCommand;
 import com.frederikp2002.friendships.commands.implementations.reload.ReloadConfigCommand;
 import com.frederikp2002.friendships.handlers.ICommandHandler;
 import com.frederikp2002.friendships.handlers.IConfigHandler;
+import com.frederikp2002.friendships.handlers.IDatabaseHandler;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,14 +23,17 @@ public class CommandHandler implements CommandExecutor, ICommandHandler {
     private final JavaPlugin plugin;
     private final IMessageHandler messageHandler;
     private final IConfigHandler configHandler;
+    private final IDatabaseHandler databaseHandler;
     private final Map<String, ICommand> commandMap = new HashMap<>();
 
-    public CommandHandler(JavaPlugin plugin, IMessageHandler messageHandler, IConfigHandler configHandler) {
+    public CommandHandler(JavaPlugin plugin, IMessageHandler messageHandler, IConfigHandler configHandler, IDatabaseHandler databaseHandler) {
         this.plugin = plugin;
         this.messageHandler = messageHandler;
         this.configHandler = configHandler;
+        this.databaseHandler = databaseHandler;
         commandMap.put("help", new HelpCommand(messageHandler, configHandler));
         commandMap.put("reloadconfig", new ReloadConfigCommand(messageHandler, configHandler));
+        commandMap.put("checkconnection", new CheckConnectionCommand(messageHandler, configHandler, databaseHandler));
     }
 
 

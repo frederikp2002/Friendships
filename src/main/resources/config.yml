@@ -1,3 +1,11 @@
+# -> Database Settings <- #
+host: '127.0.0.1'
+port: 3306
+database: 'minecraft'
+username: 'root'
+password: '0GlPo[)(eJU7sOk}UTza'
+
 # Enable and disable commands here
 command.help.enabled: true
 command.reload.config.enabled: true
+command.database.checkconnection.enabled: true

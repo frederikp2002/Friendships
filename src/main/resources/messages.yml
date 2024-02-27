@@ -3,16 +3,18 @@ plugin.disabled: 'The Friendships Plugin was successfully disabled!'
 config.created: 'The configuration file was successfully created!'
 config.error: 'An error occurred while creating the configuration file!'
 
-# Command Handler!
+# -> Database Settings <- #
+database.connected: 'The database has been connected!'
+database.disconnected: 'The database has been disconnected!'
+command.database.checkconnection.disabled: '<red>The check connection command has been disabled!</red>'
+command.database.checkconnection.connected: '<#4DAD5B>The database is connected!</#4DAD5B>'
+command.database.checkconnection.disconnected: '<red>The database is disconnected!</red>'
+
+# -> Command Handler <- #
 commandHandler.playersOnly: "Only players can execute commands!"
 commandHandler.invalidArgument: "<#CC0000>Invalid argument! <#8E8E8E>Try <#AF6EF0>/friends Help</#AF6EF0> for a list of all commands!</#8E8E8E>"
 
-########################
-##                    ##
-##      COMMANDS      ##
-##                    ##
-########################
-
+# -> Commands <- #
 # Help
 command.help.list:
   - "<gold>Available commands:</gold>"
@@ -20,5 +22,5 @@ command.help.list:
 command.help.disabled: '<red>The help command has been disabled!</red>'
 
 # Reload
-command.reload.config.success: '<#8E8E8E>The configuration file was successfully reloaded!</#8E8E8E>'
+command.reload.config.success: '<#4DAD5B>The configuration file was successfully reloaded!</#4DAD5B>'
 command.reload.config.disabled: '<red>The reload config command has been disabled!</red>'
