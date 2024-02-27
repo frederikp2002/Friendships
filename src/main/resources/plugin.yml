@@ -2,3 +2,7 @@ name: Friendships
 version: '${project.version}'
 main: com.frederikp2002.friendships.Main
 api-version: '1.20'
+commands:
+  friends:
+    aliases: [f, friend]
+    description: 'Main command for the Friendships plugin'
