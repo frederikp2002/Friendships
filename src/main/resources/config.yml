@@ -9,3 +9,4 @@ password: '0GlPo[)(eJU7sOk}UTza'
 command.help.enabled: true
 command.reload.config.enabled: true
 command.database.checkconnection.enabled: true
+command.database.noargs.enabled: true

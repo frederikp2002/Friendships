@@ -20,9 +20,15 @@ commandHandler.invalidArgument: "<#CC0000>Invalid argument! <#8E8E8E>Try <#AF6EF
 # Help
 command.help.list:
   - "<gold>Available commands:</gold>"
-  - "<#AF6EF0>/friends help</#AF6EF0><#8E8E8E>: See available commands </#8E8E8E>"
+  - "<#AF6EF0>/friends help</#AF6EF0><#8E8E8E>: See available commands</#8E8E8E>"
 command.help.disabled: '<red>The help command has been disabled!</red>'
 
 # Reload
 command.reload.config.success: '<#4DAD5B>The configuration file was successfully reloaded!</#4DAD5B>'
 command.reload.config.disabled: '<red>The reload config command has been disabled!</red>'
+
+# Database
+command.database.noargs.disabled: '<red>The noargs command has been disabled!</red>'
+command.database.noargs.list:
+  - "<gold>Available commands:</gold>"
+  - "<#AF6EF0>/friends database check</#AF6EF0><#8E8E8E>: Check database connection</#8E8E8E>"
