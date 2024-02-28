@@ -48,6 +48,7 @@ public class DatabaseHandler implements IDatabaseHandler {
                 connection.close();
                 plugin.getLogger().info(messageHandler.getMessage("database.disconnected").content());
             } catch (SQLException e) {
+                plugin.getLogger().severe(messageHandler.getMessage("database.disconnecting.error").content());
                 plugin.getLogger().severe(e.getMessage());
             }
         }
