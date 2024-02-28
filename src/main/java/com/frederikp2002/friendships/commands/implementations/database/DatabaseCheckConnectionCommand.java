@@ -1,13 +1,12 @@
 package com.frederikp2002.friendships.commands.implementations.database;
 
+import com.frederikp2002.friendships.commands.ICommand;
 import com.frederikp2002.friendships.handlers.IConfigHandler;
 import com.frederikp2002.friendships.handlers.IDatabaseHandler;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-
-public class DatabaseCheckConnectionCommand {
+public class DatabaseCheckConnectionCommand implements ICommand {
 
     private final IMessageHandler messageHandler;
     private final IConfigHandler configHandler;
@@ -19,7 +18,7 @@ public class DatabaseCheckConnectionCommand {
         this.databaseHandler = databaseHandler;
     }
 
-    public void DatabaseCheckConnection(Player player) {
+    public void execute(Player player, String[] args) {
         if (!configHandler.getBool("command.database.checkconnection.enabled")) {
             player.sendMessage(messageHandler.getMessage("command.database.checkconnection.disabled"));
             return;
@@ -31,4 +30,9 @@ public class DatabaseCheckConnectionCommand {
             player.sendMessage(messageHandler.getMessage("command.database.checkconnection.disconnected"));
         }
     }
+
+    public String[] getAliases() {
+        return new String[]{"checkconnection", "check"};
+    }
+
 }

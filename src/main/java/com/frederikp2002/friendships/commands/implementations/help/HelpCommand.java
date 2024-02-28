@@ -1,8 +1,7 @@
-package com.frederikp2002.friendships.commands.implementations.database;
+package com.frederikp2002.friendships.commands.implementations.help;
 
 import com.frederikp2002.friendships.commands.ICommand;
 import com.frederikp2002.friendships.handlers.IConfigHandler;
-import com.frederikp2002.friendships.handlers.IDatabaseHandler;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
 import org.bukkit.entity.Player;
 
@@ -10,20 +9,21 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DatabaseCommand implements ICommand {
+public class HelpCommand implements ICommand {
 
-    private final DatabaseNoArgsCommand databaseNoArgsCommand;
+    private final HelpNoArgsCommand helpNoArgsCommand;
     private final Map<String, ICommand> subcommands = new HashMap<>();
 
-    public DatabaseCommand(IMessageHandler messageHandler, IConfigHandler configHandler, IDatabaseHandler databaseHandler) {
-        this.databaseNoArgsCommand = new DatabaseNoArgsCommand(messageHandler, configHandler);
-        registerSubcommand(new DatabaseCheckConnectionCommand(messageHandler, configHandler, databaseHandler));
+    public HelpCommand(IMessageHandler messageHandler, IConfigHandler configHandler) {
+        this.helpNoArgsCommand = new HelpNoArgsCommand(messageHandler, configHandler);
+        registerSubcommand(new HelpReloadCommand(messageHandler, configHandler));
+        registerSubcommand(new HelpDatabaseCommand(messageHandler, configHandler));
     }
 
     @Override
     public void execute(Player player, String[] args) {
         if (args.length <= 1) {
-            databaseNoArgsCommand.DatabaseNoArgsFound(player);
+            helpNoArgsCommand.HelpNoArgsFound(player);
             return;
         }
 
@@ -32,7 +32,7 @@ public class DatabaseCommand implements ICommand {
         if (subcommand != null) {
             subcommand.execute(player, Arrays.copyOfRange(args, 2, args.length));
         } else {
-            databaseNoArgsCommand.DatabaseNoArgsFound(player);
+            helpNoArgsCommand.HelpNoArgsFound(player);
         }
     }
 
@@ -44,7 +44,7 @@ public class DatabaseCommand implements ICommand {
 
     @Override
     public String[] getAliases() {
-        return new String[]{"database", "db"};
+        return new String[]{"help", "helpme"};
     }
 
 }

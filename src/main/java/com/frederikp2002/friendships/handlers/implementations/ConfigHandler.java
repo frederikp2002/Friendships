@@ -35,7 +35,7 @@ public class ConfigHandler implements IConfigHandler {
                 // If not, create the file from the plugin's resources.
                 plugin.saveResource("config.yml", false);
                 // Log an informational message indicating the creation of the file.
-                plugin.getLogger().info(messageHandler.getMessage("config.created").content());
+                plugin.getLogger().info(messageHandler.getMessage("plugin.config.created").content());
             }
 
             // Load the configuration from the config.yml file.
@@ -43,7 +43,7 @@ public class ConfigHandler implements IConfigHandler {
 
         } catch (Exception e) {
             // Log an error message if there's an issue loading the configuration.
-            plugin.getLogger().severe(messageHandler.getMessage("config.error").content() + e.getMessage());
+            plugin.getLogger().severe(messageHandler.getMessage("plugin.config.error").content() + e.getMessage());
         }
     }
 

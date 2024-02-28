@@ -25,4 +25,10 @@ public class ReloadConfigCommand implements ICommand {
         player.sendMessage(messageHandler.getMessage("command.reload.config.success"));
 
     }
+
+    @Override
+    public String[] getAliases() {
+        return new String[]{"config", "conf"};
+    }
+
 }

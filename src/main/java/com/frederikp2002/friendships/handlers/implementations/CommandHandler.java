@@ -1,9 +1,9 @@
 package com.frederikp2002.friendships.handlers.implementations;
 
 import com.frederikp2002.friendships.commands.ICommand;
-import com.frederikp2002.friendships.commands.implementations.HelpCommand;
+import com.frederikp2002.friendships.commands.implementations.help.HelpCommand;
 import com.frederikp2002.friendships.commands.implementations.database.DatabaseCommand;
-import com.frederikp2002.friendships.commands.implementations.reload.ReloadConfigCommand;
+import com.frederikp2002.friendships.commands.implementations.reload.ReloadCommand;
 import com.frederikp2002.friendships.handlers.ICommandHandler;
 import com.frederikp2002.friendships.handlers.IConfigHandler;
 import com.frederikp2002.friendships.handlers.IDatabaseHandler;
@@ -27,9 +27,16 @@ public class CommandHandler implements CommandExecutor, ICommandHandler {
     public CommandHandler(JavaPlugin plugin, IMessageHandler messageHandler, IConfigHandler configHandler, IDatabaseHandler databaseHandler) {
         this.plugin = plugin;
         this.messageHandler = messageHandler;
-        commandMap.put("help", new HelpCommand(messageHandler, configHandler));
-        commandMap.put("reloadconfig", new ReloadConfigCommand(messageHandler, configHandler));
-        commandMap.put("database", new DatabaseCommand(messageHandler, configHandler, databaseHandler));
+        // Register DatabaseCommand with its aliases
+        registerCommand(new DatabaseCommand(messageHandler, configHandler, databaseHandler));
+        registerCommand(new ReloadCommand(messageHandler, configHandler));
+        registerCommand(new HelpCommand(messageHandler, configHandler));
+    }
+
+    private void registerCommand(ICommand command) {
+        for (String alias : command.getAliases()) {
+            commandMap.put(alias, command);
+        }
     }
 
 
@@ -76,7 +83,7 @@ public class CommandHandler implements CommandExecutor, ICommandHandler {
             command.execute(player, args);
             return true;
         } else {
-            player.sendMessage(messageHandler.getMessage("commandHandler.invalidArgument"));
+            player.sendMessage(messageHandler.getMessage("command.invalidArgument"));
             return false;
         }
     }
@@ -97,7 +104,7 @@ public class CommandHandler implements CommandExecutor, ICommandHandler {
      */
     private void playersOnlyNotification() {
         // Log a warning message indicating that the command is player-only.
-        plugin.getLogger().warning(messageHandler.getMessage("commandHandler.playersOnly").content());
+        plugin.getLogger().warning(messageHandler.getMessage("command.playersOnly").content());
     }
 
 }
