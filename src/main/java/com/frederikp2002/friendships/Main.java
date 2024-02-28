@@ -41,6 +41,7 @@ public final class Main extends JavaPlugin {
         try {
             databaseHandler.connect();
         } catch (Exception e) {
+            getLogger().severe(messageHandler.getMessage("database.connecting.error").content());
             getLogger().severe(e.getMessage());
         }
     }

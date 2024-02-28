@@ -6,6 +6,8 @@ config.error: 'An error occurred while creating the configuration file!'
 # -> Database Settings <- #
 database.connected: 'The database has been connected!'
 database.disconnected: 'The database has been disconnected!'
+database.connecting.error: 'An error occurred when trying to connect to the database! Please check your configurations in config.yml!'
+database.disconnecting.error: 'An error occurred when trying to disconnect from the database! Please contact @frederikp2002 on Discord!'
 command.database.checkconnection.disabled: '<red>The check connection command has been disabled!</red>'
 command.database.checkconnection.connected: '<#4DAD5B>The database is connected!</#4DAD5B>'
 command.database.checkconnection.disconnected: '<red>The database is disconnected!</red>'
