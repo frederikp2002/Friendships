@@ -19,20 +19,20 @@ public class DatabaseCheckConnectionCommand implements ICommand {
     }
 
     public void execute(Player player, String[] args) {
-        if (!configHandler.getBool("command.database.checkconnection.enabled")) {
-            player.sendMessage(messageHandler.getMessage("command.database.checkconnection.disabled"));
+        if (!configHandler.getBool("command.database.checkConnection.enabled")) {
+            player.sendMessage(messageHandler.getMessage("command.database.checkConnection.disabled"));
             return;
         }
 
         if (databaseHandler.isConnected()) {
-            player.sendMessage(messageHandler.getMessage("command.database.checkconnection.connected"));
+            player.sendMessage(messageHandler.getMessage("command.database.checkConnection.connected"));
         } else {
-            player.sendMessage(messageHandler.getMessage("command.database.checkconnection.disconnected"));
+            player.sendMessage(messageHandler.getMessage("command.database.checkConnection.disconnected"));
         }
     }
 
     public String[] getAliases() {
-        return new String[]{"checkconnection", "check"};
+        return new String[]{"checkConnection", "check"};
     }
 
     public String[] getTabCompleteOptions(Player player, String[] args) {

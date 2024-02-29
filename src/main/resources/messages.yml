@@ -33,7 +33,7 @@
 # 3. Anything command related is prefixed with "command."
 #    - EXAMPLE: "command.reload.config.success":
 #      Here, the main key is "command" as you are targeting commands, then the command itself is "reload".
-#      Which, in game, would be "/friends reload" - and then the subkey is "config" which is the subcommand of "reload".
+#      Which, in game, would be "/friends reload" - and then the sub key is "config" which is the subcommand of "reload".
 #      You will usually just search for "command.reload" and then you will receive everything related to the command "/friends reload".
 #
 # SUPPORTED FORMATTING:
@@ -102,12 +102,12 @@ command.tabCompletionCommands:
     - "database"
 
 # Help
-command.help.noargs.list:
+command.help.noArgs.list:
   - "<#2FA7D6>Available commands:</#2FA7D6>"
   - "<#AF6EF0>/friends help</#AF6EF0><#8E8E8E>: See available commands</#8E8E8E>"
   - "<#AF6EF0>/friends reload</#AF6EF0><#8E8E8E>: Reload files</#8E8E8E>"
   - "<#AF6EF0>/friends database</#AF6EF0><#8E8E8E>: Perform database actions</#8E8E8E>"
-command.help.noargs.disabled: '<#E3340D>The help command has been disabled!</#E3340D>'
+command.help.noArgs.disabled: '<#E3340D>The help command has been disabled!</#E3340D>'
 command.help.reload.list:
   - ""
   - "<#2FA7D6>About the Reload command:</#2FA7D6>"
@@ -130,16 +130,16 @@ command.help.database.disabled: '<#E3340D>The database help command has been dis
 # Reload
 command.reload.config.success: '<#4DAD5B>The configuration file was successfully reloaded!</#4DAD5B>'
 command.reload.config.disabled: '<#E3340D>The reload config command has been disabled!</#E3340D>'
-command.reload.noargs.disabled: '<#E3340D>The noargs command has been disabled!</#E3340D>'
-command.reload.noargs.list:
+command.reload.noArgs.disabled: '<#E3340D>The no arguments command has been disabled!</#E3340D>'
+command.reload.noArgs.list:
   - "<#2FA7D6>Available commands:</#2FA7D6>"
   - "<#AF6EF0>/friends reload config</#AF6EF0><#8E8E8E>: Reload the configuration file</#8E8E8E>"
 
 # Database
-command.database.noargs.disabled: '<#E3340D>The noargs command has been disabled!</#E3340D>'
-command.database.noargs.list:
+command.database.noArgs.disabled: '<#E3340D>The no arguments command has been disabled!</#E3340D>'
+command.database.noArgs.list:
   - "<#2FA7D6>Available commands:</#2FA7D6>"
   - "<#AF6EF0>/friends database check</#AF6EF0><#8E8E8E>: Check database connection</#8E8E8E>"
-command.database.checkconnection.disabled: '<#E3340D>The check connection command has been disabled!</#E3340D>'
-command.database.checkconnection.connected: '<#4DAD5B>The database is connected!</#4DAD5B>'
-command.database.checkconnection.disconnected: '<#E3340D>The database is disconnected!</#E3340D>'
+command.database.checkConnection.disabled: '<#E3340D>The check connection command has been disabled!</#E3340D>'
+command.database.checkConnection.connected: '<#4DAD5B>The database is connected!</#4DAD5B>'
+command.database.checkConnection.disconnected: '<#E3340D>The database is disconnected!</#E3340D>'

@@ -46,10 +46,10 @@ password: '0GlPo[)(eJU7sOk}UTza'
 #  \___|  \___/  |_| |_| |_| |_| |_| |_|  \__,_| |_| |_|  \__,_| |___/
 
 # Toggle the commands on or off by setting the value of the specific command to true or false.
-command.help.noargs.enabled: true
+command.help.noArgs.enabled: true
 command.help.reload.enabled: true
 command.help.database.enabled: true
-command.reload.noargs.enabled: true
+command.reload.noArgs.enabled: true
 command.reload.config.enabled: true
-command.database.checkconnection.enabled: true
-command.database.noargs.enabled: true
+command.database.checkConnection.enabled: true
+command.database.noArgs.enabled: true

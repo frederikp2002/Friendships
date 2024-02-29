@@ -44,7 +44,7 @@ public class HelpCommand implements ICommand {
 
     @Override
     public String[] getAliases() {
-        return new String[]{"help", "helpme"};
+        return new String[]{"help", "helpMe"};
     }
 
     @Override

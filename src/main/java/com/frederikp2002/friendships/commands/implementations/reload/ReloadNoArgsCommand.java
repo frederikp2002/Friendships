@@ -18,12 +18,12 @@ public class ReloadNoArgsCommand {
     }
 
     public void ReloadNoArgsFound(Player player) {
-        if (!configHandler.getBool("command.reload.noargs.enabled")) {
-            player.sendMessage(messageHandler.getMessage("command.reload.noargs.disabled"));
+        if (!configHandler.getBool("command.reload.noArgs.enabled")) {
+            player.sendMessage(messageHandler.getMessage("command.reload.noArgs.disabled"));
             return;
         }
 
-        List<Component> helpMessages = messageHandler.getMessageListFormatted("command.reload.noargs.list");
+        List<Component> helpMessages = messageHandler.getMessageListFormatted("command.reload.noArgs.list");
         for (Component message : helpMessages) {
             player.sendMessage(message);
         }

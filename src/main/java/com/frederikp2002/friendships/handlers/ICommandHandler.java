@@ -5,5 +5,5 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
 public interface ICommandHandler {
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args);
+    boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args);
 }

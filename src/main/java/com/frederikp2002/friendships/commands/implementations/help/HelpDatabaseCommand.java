@@ -20,7 +20,7 @@ public class HelpDatabaseCommand implements ICommand {
     @Override
     public void execute(Player player, String[] args) {
         if (!configHandler.getBool("command.help.database.enabled")) {
-            player.sendMessage(messageHandler.getMessage("command.help.databsae.disabled"));
+            player.sendMessage(messageHandler.getMessage("command.help.database.disabled"));
             return;
         }
 

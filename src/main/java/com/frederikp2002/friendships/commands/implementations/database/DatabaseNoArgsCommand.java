@@ -19,12 +19,12 @@ public class DatabaseNoArgsCommand {
     }
 
     public void DatabaseNoArgsFound(Player player) {
-        if (!configHandler.getBool("command.database.noargs.enabled")) {
-            player.sendMessage(messageHandler.getMessage("command.database.noargs.disabled"));
+        if (!configHandler.getBool("command.database.noArgs.enabled")) {
+            player.sendMessage(messageHandler.getMessage("command.database.noArgs.disabled"));
             return;
         }
 
-        List<Component> helpMessages = messageHandler.getMessageListFormatted("command.database.noargs.list");
+        List<Component> helpMessages = messageHandler.getMessageListFormatted("command.database.noArgs.list");
         for (Component message : helpMessages) {
             player.sendMessage(message);
         }

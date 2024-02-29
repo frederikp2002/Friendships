@@ -18,12 +18,12 @@ public class HelpNoArgsCommand {
     }
 
     public void HelpNoArgsFound(Player player) {
-        if (!configHandler.getBool("command.help.noargs.enabled")) {
-            player.sendMessage(messageHandler.getMessage("command.help.noargs.disabled"));
+        if (!configHandler.getBool("command.help.noArgs.enabled")) {
+            player.sendMessage(messageHandler.getMessage("command.help.noArgs.disabled"));
             return;
         }
 
-        List<Component> helpMessages = messageHandler.getMessageListFormatted("command.help.noargs.list");
+        List<Component> helpMessages = messageHandler.getMessageListFormatted("command.help.noArgs.list");
         for (Component message : helpMessages) {
             player.sendMessage(message);
         }
