@@ -8,17 +8,22 @@ import com.frederikp2002.friendships.handlers.ICommandHandler;
 import com.frederikp2002.friendships.handlers.IConfigHandler;
 import com.frederikp2002.friendships.handlers.IDatabaseHandler;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class CommandHandler implements CommandExecutor, ICommandHandler {
+public class CommandHandler implements TabExecutor, ICommandHandler {
 
     private final JavaPlugin plugin;
     private final IMessageHandler messageHandler;
@@ -27,7 +32,6 @@ public class CommandHandler implements CommandExecutor, ICommandHandler {
     public CommandHandler(JavaPlugin plugin, IMessageHandler messageHandler, IConfigHandler configHandler, IDatabaseHandler databaseHandler) {
         this.plugin = plugin;
         this.messageHandler = messageHandler;
-        // Register DatabaseCommand with its aliases
         registerCommand(new DatabaseCommand(messageHandler, configHandler, databaseHandler));
         registerCommand(new ReloadCommand(messageHandler, configHandler));
         registerCommand(new HelpCommand(messageHandler, configHandler));
@@ -51,15 +55,13 @@ public class CommandHandler implements CommandExecutor, ICommandHandler {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(commandSender instanceof Player)) {
+        if (!(commandSender instanceof Player player)) {
             playersOnlyNotification();
             return false;
         }
 
         // Check if the command is the expected "friends" command.
         if (!(command.getName().equalsIgnoreCase("friends"))) return false;
-
-        Player player = (Player) commandSender;
 
         // Handle commands based on whether they have arguments.
         if (args.length == 0) {
@@ -107,5 +109,25 @@ public class CommandHandler implements CommandExecutor, ICommandHandler {
         plugin.getLogger().warning(messageHandler.getMessage("command.playersOnly").content());
     }
 
-}
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
+        if (!(commandSender instanceof Player)) {
+            return null;
+        }
+
+        ICommand command1 = commandMap.get(strings[0]);
+        if (command1 != null) {
+            return List.of(command1.getTabCompleteOptions((Player) commandSender, strings));
+        }
+
+        List<Component> componentList = messageHandler.getMessageListFormatted("command.tabCompletionCommands");
+        List<String> commandAliases = new ArrayList<>();
+        for(Component component : componentList) {
+            String textContent = PlainTextComponentSerializer.plainText().serialize(component);
+            commandAliases.add(textContent);
+        }
+
+        return commandAliases;
+    }
+}

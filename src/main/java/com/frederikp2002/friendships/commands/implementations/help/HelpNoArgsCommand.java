@@ -28,4 +28,5 @@ public class HelpNoArgsCommand {
             player.sendMessage(message);
         }
     }
+
 }

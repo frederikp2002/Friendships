@@ -47,4 +47,19 @@ public class HelpCommand implements ICommand {
         return new String[]{"help", "helpme"};
     }
 
+    @Override
+    public String[] getTabCompleteOptions(Player player, String[] args) {
+        if (args.length >= 2) {
+            if (args.length == 2) {
+                return subcommands.keySet().toArray(new String[0]);
+            }
+
+            // Now, args.length must be > 2 to reach this point
+            ICommand subcommand = subcommands.get(args[1]);
+            if (subcommand != null) {
+                return subcommand.getTabCompleteOptions(player, Arrays.copyOfRange(args, 2, args.length));
+            }
+        }
+        return new String[0];
+    }
 }

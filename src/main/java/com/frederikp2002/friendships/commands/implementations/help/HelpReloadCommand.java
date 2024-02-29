@@ -36,4 +36,9 @@ public class HelpReloadCommand implements ICommand {
         return new String[]{"reload", "rl"};
     }
 
+    @Override
+    public String[] getTabCompleteOptions(Player player, String[] args) {
+        return new String[0];
+    }
+
 }
