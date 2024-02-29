@@ -96,6 +96,10 @@ database.disconnecting.error: 'An error occurred when trying to disconnect from 
 # General Settings
 command.playersOnly: "Only players can execute commands!"
 command.invalidArgument: "<#E3340D>Invalid argument! <#8E8E8E>Try <#AF6EF0>/friends Help</#AF6EF0> for a list of all commands!</#8E8E8E>"
+command.tabCompletionCommands:
+    - "help"
+    - "reload"
+    - "database"
 
 # Help
 command.help.noargs.list:

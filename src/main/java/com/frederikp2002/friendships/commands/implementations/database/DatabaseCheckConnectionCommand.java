@@ -35,4 +35,8 @@ public class DatabaseCheckConnectionCommand implements ICommand {
         return new String[]{"checkconnection", "check"};
     }
 
+    public String[] getTabCompleteOptions(Player player, String[] args) {
+        return new String[0];
+    }
+
 }

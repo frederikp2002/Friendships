@@ -31,4 +31,9 @@ public class ReloadConfigCommand implements ICommand {
         return new String[]{"config", "conf"};
     }
 
+    @Override
+    public String[] getTabCompleteOptions(Player player, String[] args) {
+        return new String[0];
+    }
+
 }
