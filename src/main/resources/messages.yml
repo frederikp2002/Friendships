@@ -100,6 +100,7 @@ command.tabCompletionCommands:
     - "help"
     - "reload"
     - "database"
+    - "test"
 
 # Help
 command.help.noArgs.list:
