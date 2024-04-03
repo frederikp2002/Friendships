@@ -1,12 +1,12 @@
 package com.frederikp2002.friendships.commands.implementations.database;
 
-import com.frederikp2002.friendships.commands.ICommand;
+import com.frederikp2002.friendships.commands.Command;
 import com.frederikp2002.friendships.handlers.IConfigHandler;
 import com.frederikp2002.friendships.handlers.IDatabaseHandler;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
 import org.bukkit.entity.Player;
 
-public class DatabaseCheckConnectionCommand implements ICommand {
+public class DatabaseCheckConnectionCommand extends Command {
 
     private final IMessageHandler messageHandler;
     private final IConfigHandler configHandler;
@@ -33,10 +33,6 @@ public class DatabaseCheckConnectionCommand implements ICommand {
 
     public String[] getAliases() {
         return new String[]{"checkConnection", "check"};
-    }
-
-    public String[] getTabCompleteOptions(Player player, String[] args) {
-        return new String[0];
     }
 
 }

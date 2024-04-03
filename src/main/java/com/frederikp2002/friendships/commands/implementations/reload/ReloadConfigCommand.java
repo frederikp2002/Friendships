@@ -1,11 +1,12 @@
 package com.frederikp2002.friendships.commands.implementations.reload;
 
-import com.frederikp2002.friendships.commands.ICommand;
+import com.frederikp2002.friendships.commands.Command;
 import com.frederikp2002.friendships.handlers.IConfigHandler;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
 import org.bukkit.entity.Player;
 
-public class ReloadConfigCommand implements ICommand {
+public class ReloadConfigCommand extends Command {
+
     private final IMessageHandler messageHandler;
     private final IConfigHandler configHandler;
 
@@ -29,11 +30,6 @@ public class ReloadConfigCommand implements ICommand {
     @Override
     public String[] getAliases() {
         return new String[]{"config", "conf"};
-    }
-
-    @Override
-    public String[] getTabCompleteOptions(Player player, String[] args) {
-        return new String[0];
     }
 
 }

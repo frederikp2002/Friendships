@@ -1,6 +1,6 @@
 package com.frederikp2002.friendships.commands.implementations.help;
 
-import com.frederikp2002.friendships.commands.ICommand;
+import com.frederikp2002.friendships.commands.Command;
 import com.frederikp2002.friendships.handlers.IConfigHandler;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
 import net.kyori.adventure.text.Component;
@@ -8,7 +8,8 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class HelpDatabaseCommand implements ICommand {
+public class HelpDatabaseCommand extends Command {
+
     private final IMessageHandler messageHandler;
     private final IConfigHandler configHandler;
 
@@ -36,8 +37,4 @@ public class HelpDatabaseCommand implements ICommand {
         return new String[]{"database", "db"};
     }
 
-    @Override
-    public String[] getTabCompleteOptions(Player player, String[] args) {
-        return new String[0];
-    }
 }

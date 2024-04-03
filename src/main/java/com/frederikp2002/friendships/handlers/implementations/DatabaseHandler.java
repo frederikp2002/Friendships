@@ -22,6 +22,13 @@ public class DatabaseHandler implements IDatabaseHandler {
         this.messageHandler = messageHandler;
     }
 
+    /**
+     * Establishes a connection to the database using the configuration details.
+     * The configuration details include host, port, database name, username, and password.
+     * Once the connection is established, a message indicating successful connection is logged.
+     *
+     * @throws SQLException if a database access error occurs.
+     */
     public void connect() throws SQLException {
         final String HOST = configHandler.getString("host");
         final int PORT = configHandler.getInt("port");
@@ -33,6 +40,12 @@ public class DatabaseHandler implements IDatabaseHandler {
         plugin.getLogger().info(messageHandler.getMessage("database.connected").content());
     }
 
+    /**
+     * Checks if the application is connected to the database.
+     * The connection is considered valid if it is not null, not closed, and valid within 1 second.
+     *
+     * @return true if the application is connected to the database, false otherwise.
+     */
     public boolean isConnected() {
         try {
             return connection != null && !connection.isClosed() && connection.isValid(1);
@@ -42,6 +55,11 @@ public class DatabaseHandler implements IDatabaseHandler {
         }
     }
 
+    /**
+     * Closes the connection to the database if it is currently connected.
+     * Once the connection is closed, a message indicating successful disconnection is logged.
+     * If an error occurs during disconnection, an error message is logged.
+     */
     public void disconnect() {
         if (isConnected()) {
             try {

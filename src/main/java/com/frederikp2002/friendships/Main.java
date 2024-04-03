@@ -4,7 +4,7 @@ import com.frederikp2002.friendships.handlers.ICommandHandler;
 import com.frederikp2002.friendships.handlers.IConfigHandler;
 import com.frederikp2002.friendships.handlers.IDatabaseHandler;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
-import com.frederikp2002.friendships.handlers.implementations.CommandHandler;
+import com.frederikp2002.friendships.handlers.implementations.commands.handlers.CommandHandler;
 import com.frederikp2002.friendships.handlers.implementations.ConfigHandler;
 import com.frederikp2002.friendships.handlers.implementations.DatabaseHandler;
 import com.frederikp2002.friendships.handlers.implementations.MessageHandler;
