@@ -1,43 +1,30 @@
 package com.frederikp2002.friendships.commands.implementations.reload;
 
 import com.frederikp2002.friendships.commands.Command;
-import com.frederikp2002.friendships.commands.ICommand;
-
-import com.frederikp2002.friendships.handlers.IConfigHandler;
-import com.frederikp2002.friendships.handlers.IMessageHandler;
+import com.frederikp2002.friendships.commands.TabCompletable;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
+import java.util.List;
 
-public class ReloadCommand extends Command {
+public class ReloadCommand extends Command implements TabCompletable {
 
-    ReloadNoArgumentsCommand reloadNoArgsCommand;
+    private final ReloadNoArgumentsCommand reloadNoArgumentsCommand;
 
-    public ReloadCommand(IMessageHandler messageHandler, IConfigHandler configHandler) {
-        this.reloadNoArgsCommand = new ReloadNoArgumentsCommand(messageHandler, configHandler);
-        super.registerSubcommand(new ReloadConfigCommand(messageHandler, configHandler));
+    public ReloadCommand() {
+        super("reload.main");
+        this.reloadNoArgumentsCommand = new ReloadNoArgumentsCommand(super.messageHandler, super.configHandler);
+        this.addSubCommand(new ReloadConfigCommand(super.messageHandler, super.configHandler));
     }
 
     @Override
     public void execute(Player player, String[] args) {
-        if (args.length <= 1) {
-            reloadNoArgsCommand.execute(player, args);
-            return;
-        }
-
-        String subcommandKey = args[1].toLowerCase();
-        ICommand subcommand = subcommands.get(subcommandKey);
-        if (subcommand != null) {
-            subcommand.execute(player, Arrays.copyOfRange(args, 2, args.length));
-        } else {
-            reloadNoArgsCommand.execute(player, args);
-        }
+        super.checkForSubcommands(player, args);
+        reloadNoArgumentsCommand.execute(player);
     }
 
     @Override
-    public String[] getAliases() {
-        return new String[]{"reload", "rl"};
+    public List<String> tabComplete(String[] args) {
+        return super.tabComplete(args);
     }
 
 }
-

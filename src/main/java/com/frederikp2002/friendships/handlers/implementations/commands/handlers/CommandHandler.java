@@ -1,18 +1,14 @@
 package com.frederikp2002.friendships.handlers.implementations.commands.handlers;
 
-import com.frederikp2002.friendships.commands.ICommand;
-import com.frederikp2002.friendships.commands.implementations.help.HelpCommand;
+import com.frederikp2002.friendships.commands.Command;
 import com.frederikp2002.friendships.commands.implementations.database.DatabaseCommand;
+import com.frederikp2002.friendships.commands.implementations.help.HelpCommand;
 import com.frederikp2002.friendships.commands.implementations.reload.ReloadCommand;
-import com.frederikp2002.friendships.commands.implementations.test.TestCommand;
 import com.frederikp2002.friendships.handlers.ICommandHandler;
-import com.frederikp2002.friendships.handlers.IConfigHandler;
-import com.frederikp2002.friendships.handlers.IDatabaseHandler;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
 import com.frederikp2002.friendships.handlers.implementations.commands.executors.CommandWithArgumentsExecutor;
 import com.frederikp2002.friendships.handlers.implementations.commands.executors.CommandWithoutArgumentsExecutor;
 import com.frederikp2002.friendships.handlers.implementations.commands.notifications.NotificationsService;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
@@ -29,20 +25,25 @@ public class CommandHandler implements TabExecutor, ICommandHandler {
     private final CommandWithoutArgumentsExecutor commandWithoutArgumentsExecutor;
     private final AutoCompleteHandler autoCompleteHandler;
     private final NotificationsService notificationsService;
-    private final Map<String, ICommand> commandMap = new HashMap<>();
+    private final Map<String, Command> commandMap = new HashMap<>();
 
-    public CommandHandler(JavaPlugin plugin, IMessageHandler messageHandler, IConfigHandler configHandler, IDatabaseHandler databaseHandler) {
-        this.commandWithArgumentsExecutor = new CommandWithArgumentsExecutor(commandMap, messageHandler);
-        this.commandWithoutArgumentsExecutor = new CommandWithoutArgumentsExecutor(commandMap);
+    public CommandHandler(JavaPlugin plugin, IMessageHandler messageHandler) {
+        // Initialize handlers
         this.autoCompleteHandler = new AutoCompleteHandler(commandMap, messageHandler);
         this.notificationsService = new NotificationsService(plugin, messageHandler);
-        registerCommand(new DatabaseCommand(messageHandler, configHandler, databaseHandler));
-        registerCommand(new ReloadCommand(messageHandler, configHandler));
-        registerCommand(new HelpCommand(messageHandler, configHandler));
-        registerCommand(new TestCommand());
+
+        // Initialize executors
+        this.commandWithArgumentsExecutor = new CommandWithArgumentsExecutor(commandMap, messageHandler);
+        this.commandWithoutArgumentsExecutor = new CommandWithoutArgumentsExecutor(commandMap);
+
+        // Register commands
+        registerCommand(new HelpCommand());
+        registerCommand(new ReloadCommand());
+        registerCommand(new DatabaseCommand());
     }
 
-    private void registerCommand(ICommand command) {
+
+    private void registerCommand(Command command) {
         for (String alias : command.getAliases()) {
             commandMap.put(alias, command);
         }
@@ -59,7 +60,7 @@ public class CommandHandler implements TabExecutor, ICommandHandler {
      */
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender,
-                             @NotNull Command command,
+                             @NotNull org.bukkit.command.Command command,
                              @NotNull String label,
                              String[] args) {
         if (!(commandSender instanceof Player player)) {
@@ -80,9 +81,10 @@ public class CommandHandler implements TabExecutor, ICommandHandler {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender,
-                                                @NotNull Command command,
+                                                @NotNull org.bukkit.command.Command command,
                                                 @NotNull String s,
                                                 String[] strings) {
         return autoCompleteHandler.onTabComplete(commandSender, command, s, strings);
     }
+
 }

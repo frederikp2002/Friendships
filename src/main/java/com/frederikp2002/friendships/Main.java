@@ -25,7 +25,7 @@ public final class Main extends JavaPlugin {
         this.messageHandler = new MessageHandler(this);
         this.configHandler = new ConfigHandler(this, messageHandler);
         this.databaseHandler = new DatabaseHandler(this, configHandler, messageHandler);
-        this.commandHandler = new CommandHandler(this, messageHandler, configHandler, databaseHandler);
+        this.commandHandler = new CommandHandler(this, messageHandler);
         Objects.requireNonNull(this.getCommand("friends")).setExecutor((CommandExecutor) this.commandHandler);
         database();
         getLogger().info(messageHandler.getMessage("plugin.enabled").content());
@@ -44,6 +44,22 @@ public final class Main extends JavaPlugin {
             getLogger().severe(messageHandler.getMessage("database.connecting.error").content());
             getLogger().severe(e.getMessage());
         }
+    }
+
+    public IMessageHandler getMessageHandler() {
+        return messageHandler;
+    }
+
+    public ICommandHandler getCommandHandler() {
+        return commandHandler;
+    }
+
+    public IConfigHandler getConfigHandler() {
+        return configHandler;
+    }
+
+    public IDatabaseHandler getDatabaseHandler() {
+        return databaseHandler;
     }
 
 }

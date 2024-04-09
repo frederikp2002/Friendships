@@ -1,15 +1,15 @@
-#  /--------------------------------------------------------------------- --------------------\
-# |                                                                                           |
-# |                                                                                           |
-# |       _____    ____    _   _   ______   _____    _____      __     __  __  __   _         |
-# |     / ____|  / __ \  | \ | | |  ____| |_   _|  / ____|     \ \   / / |  \/  | | |         |
-# |    | |      | |  | | |  \| | | |__      | |   | |  __       \ \_/ /  | \  / | | |         |
-# |    | |      | |  | | | . ` | |  __|     | |   | | |_ |       \   /   | |\/| | | |         |
-# |    | |____  | |__| | | |\  | | |       _| |_  | |__| |  _     | |    | |  | | | |____     |
-# |     \_____|  \____/  |_| \_| |_|      |_____|  \_____| (_)    |_|    |_|  |_| |______|    |
-# |                                                                                           |
-# |                                                                                           |
-#  \------------------------------------------------------------------------------------------/
+#  // ======================================================================================= \\
+# ||                                                                                           ||
+# ||                                                                                           ||
+# ||       _____    ____    _   _   ______   _____    _____      __     __  __  __   _         ||
+# ||     / ____|  / __ \  | \ | | |  ____| |_   _|  / ____|     \ \   / / |  \/  | | |         ||
+# ||    | |      | |  | | |  \| | | |__      | |   | |  __       \ \_/ /  | \  / | | |         ||
+# ||    | |      | |  | | | . ` | |  __|     | |   | | |_ |       \   /   | |\/| | | |         ||
+# ||    | |____  | |__| | | |\  | | |       _| |_  | |__| |  _     | |    | |  | | | |____     ||
+# ||     \_____|  \____/  |_| \_| |_|      |_____|  \_____| (_)    |_|    |_|  |_| |______|    ||
+# ||                                                                                           ||
+# ||                                                                                           ||
+# \\ ======================================================================================== //
 
 #
 # INTRODUCTION:
@@ -53,3 +53,57 @@ command.reload.noArgs.enabled: true
 command.reload.config.enabled: true
 command.database.checkConnection.enabled: true
 command.database.noArgs.enabled: true
+
+command:
+  help:
+    main:
+      permission: 'friendships.help'
+      description: 'Shows all the commands'
+      syntax: '/friendships help'
+      aliases:
+        - 'help'
+        - 'helpme'
+    database:
+      permission: 'friendships.help.database'
+      description: 'Shows all database commands'
+      syntax: '/friendships help database'
+      aliases:
+        - 'database'
+        - 'db'
+    reload:
+      permission: 'friendships.help.reload'
+      description: 'Shows all reload commands'
+      syntax: '/friendships help reload'
+      aliases:
+        - 'reload'
+        - 'rl'
+  reload:
+    main:
+      permission: 'friendships.reload'
+      description: 'Reloads the selected file(s)'
+      syntax: '/friendships reload'
+      aliases:
+        - 'reload'
+        - 'rl'
+    config:
+      permission: 'friendships.reload.config'
+      description: 'Reloads the config.yml file'
+      syntax: '/friendships reload config'
+      aliases:
+        - 'config'
+        - 'cfg'
+  database:
+    main:
+      permission: 'friendships.database'
+      description: 'Perform database operations'
+      syntax: '/friendships database'
+      aliases:
+        - 'database'
+        - 'db'
+    checkConnection:
+      permission: 'friendships.database.checkconnection'
+      description: 'Check on the database connection'
+      syntax: '/friendships database checkconnection'
+      aliases:
+        - 'checkconnection'
+        - 'checkconn'

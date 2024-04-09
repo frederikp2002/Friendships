@@ -11,25 +11,15 @@ public class ReloadConfigCommand extends Command {
     private final IConfigHandler configHandler;
 
     public ReloadConfigCommand(IMessageHandler messageHandler, IConfigHandler configHandler) {
+        super("reload.config");
         this.messageHandler = messageHandler;
         this.configHandler = configHandler;
     }
 
     @Override
     public void execute(Player player, String[] args) {
-        if (!configHandler.getBool("command.reload.config.enabled")) {
-            player.sendMessage(messageHandler.getMessage("command.reload.config.disabled"));
-            return;
-        }
-
         configHandler.reloadConfig();
         player.sendMessage(messageHandler.getMessage("command.reload.config.success"));
-
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{"config", "conf"};
     }
 
 }

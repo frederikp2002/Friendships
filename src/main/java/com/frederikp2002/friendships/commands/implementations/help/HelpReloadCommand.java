@@ -1,40 +1,30 @@
 package com.frederikp2002.friendships.commands.implementations.help;
 
 import com.frederikp2002.friendships.commands.Command;
-import com.frederikp2002.friendships.handlers.IConfigHandler;
-import com.frederikp2002.friendships.handlers.IMessageHandler;
+import com.frederikp2002.friendships.commands.TabCompletable;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class HelpReloadCommand extends Command {
+public class HelpReloadCommand extends Command implements TabCompletable {
 
-    private final IMessageHandler messageHandler;
-    private final IConfigHandler configHandler;
-
-    public HelpReloadCommand(IMessageHandler messageHandler, IConfigHandler configHandler) {
-        this.messageHandler = messageHandler;
-        this.configHandler = configHandler;
+    public HelpReloadCommand() {
+        super("help.reload");
     }
 
     @Override
     public void execute(Player player, String[] args) {
-        if (!configHandler.getBool("command.help.reload.enabled")) {
-            player.sendMessage(messageHandler.getMessage("command.help.reload.disabled"));
-            return;
-        }
-
         List<Component> helpMessages = messageHandler.getMessageListFormatted("command.help.reload.list");
         for (Component message : helpMessages) {
             player.sendMessage(message);
         }
-
     }
 
     @Override
-    public String[] getAliases() {
-        return new String[]{"reload", "rl"};
+    public List<String> tabComplete(String[] args) {
+        return super.tabComplete(args);
     }
+
 
 }

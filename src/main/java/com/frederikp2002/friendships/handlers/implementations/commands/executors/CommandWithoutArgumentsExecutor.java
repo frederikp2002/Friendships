@@ -1,14 +1,14 @@
 package com.frederikp2002.friendships.handlers.implementations.commands.executors;
 
-import com.frederikp2002.friendships.commands.ICommand;
+import com.frederikp2002.friendships.commands.Command;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
 
 public class CommandWithoutArgumentsExecutor {
-    private final Map<String, ICommand> commandMap;
+    private final Map<String, Command> commandMap;
 
-    public CommandWithoutArgumentsExecutor(Map<String, ICommand> commandMap) {
+    public CommandWithoutArgumentsExecutor(Map<String, Command> commandMap) {
         this.commandMap = commandMap;
     }
 
@@ -19,8 +19,15 @@ public class CommandWithoutArgumentsExecutor {
      * @return true, indicating the command was handled.
      */
     public boolean handleNoArgumentsCommand(Player player) {
-        commandMap.get("help").execute(player, new String[0]);
+        Command helpCommand = commandMap.get("help");
+        if (helpCommand != null) {
+            helpCommand.execute(player, new String[0]);
+        } else {
+            player.sendMessage("Help command not found.");
+            // Or any other fallback mechanism
+        }
         return true;
     }
 
 }
+

@@ -1,43 +1,32 @@
 package com.frederikp2002.friendships.commands.implementations.database;
 
 import com.frederikp2002.friendships.commands.Command;
-import com.frederikp2002.friendships.commands.ICommand;
-import com.frederikp2002.friendships.handlers.IConfigHandler;
-import com.frederikp2002.friendships.handlers.IDatabaseHandler;
-import com.frederikp2002.friendships.handlers.IMessageHandler;
+import com.frederikp2002.friendships.commands.TabCompletable;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
+import java.util.List;
 
-public class DatabaseCommand extends Command {
+public class DatabaseCommand extends Command implements TabCompletable {
 
     private final DatabaseNoArgumentsCommand databaseNoArgsCommand;
 
-    public DatabaseCommand(IMessageHandler messageHandler, IConfigHandler configHandler, IDatabaseHandler databaseHandler) {
-        this.databaseNoArgsCommand = new DatabaseNoArgumentsCommand(messageHandler, configHandler);
-        super.registerSubcommand(new DatabaseCheckConnectionCommand(messageHandler, configHandler, databaseHandler));
-        super.registerSubcommand(new DatabaseCheckConnectionCommand(messageHandler, configHandler, databaseHandler));
+    public DatabaseCommand() {
+        super("database.main");
+        this.addSubCommand(new DatabaseCheckConnectionCommand());
+        this.databaseNoArgsCommand = new DatabaseNoArgumentsCommand(super.messageHandler, super.configHandler);
     }
 
     @Override
     public void execute(Player player, String[] args) {
-        if (args.length <= 1) {
-            databaseNoArgsCommand.execute(player, args);
-            return;
-        }
-
-        String subcommandKey = args[1].toLowerCase();
-        ICommand subcommand = subcommands.get(subcommandKey);
-        if (subcommand != null) {
-            subcommand.execute(player, Arrays.copyOfRange(args, 2, args.length));
-        } else {
-            databaseNoArgsCommand.execute(player, args);
-        }
+        super.checkForSubcommands(player, args);
+        databaseNoArgsCommand.execute(player);
     }
 
     @Override
-    public String[] getAliases() {
-        return new String[]{"database", "db"};
+    public List<String> tabComplete(String[] args) {
+        return super.tabComplete(args);
     }
+
+
 
 }

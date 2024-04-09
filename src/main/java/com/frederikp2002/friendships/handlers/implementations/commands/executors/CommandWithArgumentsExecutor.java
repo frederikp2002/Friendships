@@ -1,15 +1,17 @@
 package com.frederikp2002.friendships.handlers.implementations.commands.executors;
 
-import com.frederikp2002.friendships.commands.ICommand;
+import com.frederikp2002.friendships.commands.Command;
 import com.frederikp2002.friendships.handlers.IMessageHandler;
 import org.bukkit.entity.Player;
+
+import java.util.Arrays;
 import java.util.Map;
 
 public class CommandWithArgumentsExecutor {
     private final IMessageHandler messageHandler;
-    private final Map<String, ICommand> commandMap;
+    private final Map<String, Command> commandMap;
 
-    public CommandWithArgumentsExecutor(Map<String, ICommand> commandMap, IMessageHandler messageHandler) {
+    public CommandWithArgumentsExecutor(Map<String, Command> commandMap, IMessageHandler messageHandler) {
         this.commandMap = commandMap;
         this.messageHandler = messageHandler;
     }
@@ -22,15 +24,16 @@ public class CommandWithArgumentsExecutor {
      */
     public boolean handleCommandWithArguments(Player player, String[] args) {
         String firstArg = args[0].toLowerCase();
-
-        ICommand command = commandMap.get(firstArg);
+        Command command = commandMap.get(firstArg);
         if (command != null) {
-            command.execute(player, args);
+            // Remove the first element (the command itself) before passing the rest as arguments
+            String[] subArgs = Arrays.copyOfRange(args, 1, args.length);
+            command.processCommand(player, subArgs);
             return true;
         } else {
             player.sendMessage(messageHandler.getMessage("command.invalidArgument"));
             return false;
         }
     }
-
 }
+
